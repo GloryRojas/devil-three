@@ -3,6 +3,20 @@
     <h1>Hero page</h1>
     <BaseLoading v-if="isLoadingHero" />
     <BaseLoading v-if="isLoadingItems" />
+    <HeroDetailHeader v-if="hero" :detail="detailHeader" />
+    <b-row>
+      <b-col md="12" lg="8" order-lg="2">
+        <BaseLoading v-if="isLoadingItems"/>
+      </b-col>
+
+      <b-col md="12" lg="4" order-lg="1">
+        <template v-if="hero">
+          <HeroAttributes :attributes="detailStats"/>
+          <HeroSkills :skills="hero.data.skills"/>
+        </template>
+      </b-col>
+
+    </b-row>
   </div>
 </template>
 
@@ -10,11 +24,14 @@
 import setError from "../../mixins/setError";
 import BaseLoading from "../../components/BaseLoading";
 import { getApiHero, getApiDetailHeroItems } from "../../api/search";
+import HeroDetailHeader from "./HeroDetailHeader";
+import HeroAttributes from "./HeroAttributes/Index";
+import HeroSkills from "./HeroSkills/Index";
 
 export default {
   name: 'HeroView',
   mixins: [setError],
-  components: { BaseLoading },
+  components: { HeroSkills, HeroAttributes, HeroDetailHeader, BaseLoading },
   data() {
     return {
       isLoadingHero: true,
@@ -22,8 +39,36 @@ export default {
       hero: null,
       items: null,
     }
+  },computed: {
+    detailHeader () {
+      const {
+        name,
+        class: classSlug,
+        gender,
+        level,
+        hardcore,
+        seasonal,
+        paragonLevel,
+        alive,
+        seasonCreated
+      } = this.hero.data
+
+      return {
+        name,
+        classSlug,
+        gender,
+        level,
+        hardcore,
+        seasonal,
+        paragonLevel,
+        alive,
+        seasonCreated
+      }
+    },
+    detailStats () {
+      return { ...this.hero.data.stats, classSlug: this.hero.data.class }
+    },
   },
-  computed: {},
   created() {
     this.isLoadingHero = true;
     this.isLoadingItems = true;
