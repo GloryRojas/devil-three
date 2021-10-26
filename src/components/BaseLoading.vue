@@ -3,7 +3,6 @@
     <div class="spinner-wrapper w-100">
       <b-spinner class="spinner" label="Loading..." :type="type" :variant="variant" />
     </div>
-    <h1></h1>
   </div>
 </template>
 

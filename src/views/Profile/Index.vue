@@ -1,7 +1,6 @@
 <template>
   <div>
-    <BaseLoading v:if="isLoading" />
-    <h1>Profile page</h1>
+    <BaseLoading v-if="isLoading" />
     <template v-if="profileData !== null">
       <MainBlock :profile-data="profileData" />
     </template>
