@@ -6,7 +6,7 @@
       <ProgressList :acts="profileData.data.progression"/>
     </div>
     <div class="grid-item item-right">
-      <h1>dercha</h1>
+      <PlayerStats :stats="statsData" />
     </div>
   </div>
 </template>
@@ -15,10 +15,11 @@
 import TopHeroes from "./TopHeroes/Index";
 import HeroesList from "./HeroesList/Index";
 import ProgressList from "./ProgressList/Index";
+import PlayerStats from "./PlayerStats/Index";
 
 export default {
   name: 'MainBlock',
-  components: {ProgressList, HeroesList, TopHeroes},
+  components: {PlayerStats, ProgressList, HeroesList, TopHeroes},
   props: {
     profileData: {
       type: Object,
@@ -37,6 +38,10 @@ export default {
     },
     heroesList () {
       return this.profileData.data.heroes.slice(3, this.profileData.data.heroes.length)
+    },
+    statsData() {
+      const { paragnonLevel, kills, timePlayed } = this.profileData.data;
+      return { paragnonLevel, kills, timePlayed }
     }
   }
 }
