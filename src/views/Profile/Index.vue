@@ -2,17 +2,8 @@
   <div>
     <BaseLoading v:if="isLoading" />
     <h1>Profile page</h1>
-    <template>
-      <div class="grid-container">
-        <div class="grid-item item-left">
-          <template v-if="profileData !== null">
-            <MainBlock :profile-data="profileData" />
-          </template>
-        </div>
-        <div class="grid-item item-right">
-          <h1>dercha</h1>
-        </div>
-      </div>
+    <template v-if="profileData !== null">
+      <MainBlock :profile-data="profileData" />
     </template>
   </div>
 </template>
@@ -68,23 +59,5 @@ export default {
 </script>
 
 <style lang="stylus">
-  .grid-container
-    display grid
-    grid-template-columns 1fr
 
-    .grid-item
-      &.item-left
-        grid-column span 1
-      &.item-right
-        grid-column span 1
-
-  @media (min-width: 992px)
-    .grid-container
-      display grid
-      grid-template-columns repeat(6, 1fr)
-      .grid-item
-        &.item-left
-          grid-column span 4
-        &.item-right
-          grid-column span 2
 </style>
