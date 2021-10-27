@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Hero page</h1>
     <BaseLoading v-if="isLoadingHero" />
     <BaseLoading v-if="isLoadingItems" />
     <HeroDetailHeader v-if="hero" :detail="detailHeader" />
