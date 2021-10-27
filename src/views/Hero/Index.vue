@@ -7,6 +7,7 @@
     <b-row>
       <b-col md="12" lg="8" order-lg="2">
         <BaseLoading v-if="isLoadingItems"/>
+        <HeroItems v-if="items" :items="items" />
       </b-col>
 
       <b-col md="12" lg="4" order-lg="1">
@@ -27,11 +28,12 @@ import { getApiHero, getApiDetailHeroItems } from "../../api/search";
 import HeroDetailHeader from "./HeroDetailHeader";
 import HeroAttributes from "./HeroAttributes/Index";
 import HeroSkills from "./HeroSkills/Index";
+import HeroItems from "./HeroItems/Index";
 
 export default {
   name: 'HeroView',
   mixins: [setError],
-  components: { HeroSkills, HeroAttributes, HeroDetailHeader, BaseLoading },
+  components: {HeroItems, HeroSkills, HeroAttributes, HeroDetailHeader, BaseLoading },
   data() {
     return {
       isLoadingHero: true,
