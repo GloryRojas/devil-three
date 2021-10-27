@@ -1,20 +1,21 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import Home from '../views/Home/Index.vue';
-
 Vue.use(VueRouter);
-const routes = [
-     {
-        path: '/',
-        name: 'Home',
-        component: Home
-      },
-      {
-        path: '/about',
-        name: 'About',
-        component: () => import(/* webpackChunkName: "about" */ '../views/About/Index.vue')
-      }
+
+const routerOptions = [
+    { path: '/', name: 'Home' },
+    { path: '/region/:region/profile/:battleTag', name: 'Profile' },
+    { path: '/region/:region/profile/:battleTag/hero/:heroId', name: 'Hero' },
+    { path: '/about', name: 'About' },
+    { path: '/error', name: 'Error' },
+    { path: '*', redirect: { name: 'Home' } }
 ]
+
+const routes = routerOptions.map((e) => ({
+ ...e,
+ component: () => import(`@/views/${e.name}/Index.vue`),
+}));
+
 const router = new VueRouter({
   routes
 })
